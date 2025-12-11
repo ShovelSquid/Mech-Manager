@@ -42,10 +42,17 @@ That's pretty much it.
 Missions are selected in a map select screen with different mission options; mechs are repaired in your garage which is where you see each mech bay; you can click on a specific one to get an up close view of an individual mech/pilots. There's a store, where you can buy new parts and hire new personnel. Those are the main screens.
 
 - Map for mission select
+![Mission Select](mech-ui-concept1.png)
     - Individual mission select
+![Mission Select](mech-ui-concept2.png)
     Description of mission, danger level, potential combatants, main goals, rewards, display image, etc.
 - Garage
     - Individual mech select
+![Alt text](mech-ui-concept3.png)
+    (selecting different parts:)
+![](mech-ui-concept4.png)
+    (pilot and no armor:)
+![](mech-ui-concept5.png)
     - Individual pilot select
 - Store
     - Individual part select
