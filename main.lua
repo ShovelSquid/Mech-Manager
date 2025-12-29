@@ -1,5 +1,11 @@
 -- love game!! main stuff
-
+A = 0
+B = 0
+local input_channel
+local cookie
+local canvas
+local width, height
+local scale = 1
 
 Handlers = {
     "get_player_position",
@@ -15,10 +21,11 @@ function Handle_Thread_Input(line)
         io.stdout:flush()
         love.handlers["get_time"] = nil
     elseif string.find(line, "set_cookies") then
-        local cookie = string.gsub(line, "set_cookies", "")
-        B = cookie
+        B = string.gsub(line, "set_cookies", "")
         print("given cookie: ", B)
         io.stdout:flush()
+    elseif string.find(line, "set_scale") then
+        scale = string.gsub(line, "set_scale", "")
     else
         print(line)
         io.stdout:flush()
@@ -32,13 +39,16 @@ function Get_player_position()
     love.handlers["get_player_position"] = nil
 end
 
-A = 0
-B = 0
-local input_channel
 
 function love.load()
     print("Love game has begun")
     io.stdout:flush() -- send message immediately
+
+    canvas = love.graphics.newCanvas(1200, 600)
+    width, height = love.graphics.getDimensions()
+
+    cookie = love.graphics.newImage("assets/cookie1.png")
+    cookie:setFilter("linear", "nearest")
     
     -- Create a channel for thread communication
     input_channel = love.thread.getChannel("stdin_input")
@@ -85,11 +95,36 @@ function love.update()
     -- end
 end
 
+function love.mousepressed(x, y, button, isTouch, presses)
+    if button == 1 then
+        print("add_cookie")
+        io.stdout:flush()
+        print("get_scale")
+        io.stdout:flush()
+    elseif button == 2 then
+        print("add_friend")
+        io.stdout:flush()
+    elseif button == 3 then
+        print("mid baby bitch boy mouse clicked")
+        io.stdout:flush()
+    end
+end
+
+
 function love.draw()
     love.graphics.print(A, 20, 20)
     love.graphics.print(B, 20, 40)
+    love.graphics.clear(0.04, 0.7, 1, 1)
+    love.graphics.push()
+    -- love.graphics.translate(-cookie:getWidth(), -cookie:getHeight())
+    -- love.graphics.scale(1.6)
+    love.graphics.draw(cookie, width/2 -scale*cookie:getWidth()/2, height/2 -scale*cookie:getHeight()/2, 0, scale, scale)
+    love.graphics.pop()
 end
 
+function get_value()
+
+end
 
 
 function draw_mech()
